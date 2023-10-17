@@ -4,6 +4,11 @@ from .models import User
 
 auth = Blueprint('auth', __name__)
 
+@auth.before_request
+def verifica_sessao():
+    if request.endpoint != 'auth.logout' and 'username' in session:
+        return redirect(url_for('protected_views.cdm'))
+
 @auth.route('/signup')
 def signup():    
     return "<h1>Signup</h1>"
@@ -13,6 +18,7 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
+        remember_me = request.form.get('remember') == 'on' 
         print(username)
         print(password)
         # Verifique as credenciais no MongoDB
@@ -23,6 +29,9 @@ def login():
             print(user.username)
             session['username'] = user.username
             flash('Login bem-sucedido!', 'success')
+            if remember_me:
+                session.permanent = True
+
             return redirect(url_for('protected_views.cdm'))
         else:
             flash('Credenciais inválidas. Tente novamente.', 'danger')
