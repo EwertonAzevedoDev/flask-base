@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="{{ url_for('static', filename='css/dist/output.css') }}">
+    <!-- Favicon -->
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+    <link href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+    <!-- # Font Awesome -->
+    <script src="https://kit.fontawesome.com/d3d9c91ae6.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet">
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+
+<body>  
+    <section class="text-gray-600 body-font relative min-h-screen w-full">
+        <div class="mx-auto flex sm:flex-nowrap flex-wrapmin-h-screen w-full">
+            <div class="lg:w-2/4 md:w-1/2 bg-nuvem flex  items-center justify-center flex-col md:ml-auto w-full mt-8 md:mt-0 h-screen m-0 p-0">
+                <div style="width: 80%;">
+                    {% block content %} 
+                    <form method="post" action="">
+                        {{ form.hidden_tag() }}
+                        {{ form.username.label("UBS", class="block text-gray-700 text-sm font-bold mb-2") }}
+                        {{ form.username(placeholder="", class="appearance-none border border-azul-detalhe  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline") }}
+                        <br><br>
+                        {{ form.password.label("Senha", class="block text-gray-700 text-sm font-bold mb-2") }}
+                        {{ form.password(placeholder="", class="appearance-none border border-azul-detalhe  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline") }}  
+                        <br><br>
+                        <div class="flex items-center">
+                            {{ form.remember(class="cursor-pointer mr-2 w-4 h-4 border border-azul-detalhe") }}
+                            {{ form.remember.label(class="ml-2 text-gray-700") }}                            
+                        </div>
+                        <div class="flex justify-end mt-4">
+                            {{ form.submit(class="cursor-pointer border border-azul-detalhe bg-secondary hover:bg-primary rounded text-nuvem font-bold py-2 px-4 focus:outline-none focus:shadow-outline", style="width: 42%;") }}
+                        </div>
+                    </form>        
+                    <br>            
+                   
+                    {% endblock %}
+                </div>
+                
+            </div>
+            <div class="lg:w-2/4 md:w-1/2 bg-secondary overflow-hidden p-10 flex flex-col items-center justify-center relative h-screen">
+                <div class="items-center card w-[360px] h-[260px] m-4 mb-4 relative transition-colors duration-200 bg-nuvem">
+                    <img src="{{ url_for('static', filename='img/Cuidamama_logo_texto.png') }}" class="w-50 h-50 mb-4">
+                </div>
+                <div class="text-center relative flex flex-wrap py-6 items-center justify-center mt-4 text-nuvem font-bold">
+                    <p style="width: 38%;">Bem-vinda à Bússola, sua aliada no cuidado e monitoramento das pacientes.</p>
+                    <br>
+                    <p class="mt-4" style="width: 65%;">Aqui, você encontra informações que vão auxiliar o</p>
+                    <p style="width: 75%;">acompanhamento de suas pacientes, do início ao fim da jornada</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
